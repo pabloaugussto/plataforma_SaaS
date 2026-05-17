@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Visão Geral</h1>
+    <a href="{% url 'novo_chamado' %}" class="btn-primary">Abrir Chamado</a>
+</div>
+
+<div class="kpi-cards">
+    <div class="card">
+        <h3>Total de Chamados</h3>
+        <p class="number">{{ total }}</p> </div>
+    <div class="card alert">
+        <h3>Abertos / Em Espera</h3>
+        <p class="number text-orange">{{ abertos }}</p> </div>
+    <div class="card success">
+        <h3>Resolvidos</h3>
+        <p class="number">{{ resolvidos }}</p> </div>
+</div>
+
+<div class="dashboard-grid">
+    <div class="chart-container card">
+        <h2>Chamados por Categoria</h2>
+        <canvas id="chamadosChart"></canvas>
+    </div>
+
+    <div class="table-container card">
+        <h2>Chamados Recentes</h2>
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>Prioridade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets|slice:":5" %}
+                <tr>
+                    <td>#{{ ticket.id }}</td>
+                    <td>{{ ticket.titulo }}</td>
+                    <td><span class="badge status-{{ ticket.status }}">{{ ticket.get_status_display }}</span></td>
+                    <td><span class="badge prio-{{ ticket.prioridade }}">{{ ticket.get_prioridade_display }}</span></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" style="text-align: center;">Nenhum chamado encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'core/js/dashboard.js' %}"></script>
+{% endblock %}

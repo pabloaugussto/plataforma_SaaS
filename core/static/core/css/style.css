@@ -1,0 +1,240 @@
+:root {
+  --bg-dark-blue: #0f172a; /* Azul muito escuro para a Sidebar */
+  --bg-main: #f1f5f9; /* Fundo cinza claro para contraste */
+  --primary-orange: #f97316; /* Laranja vibrante */
+  --hover-orange: #ea580c;
+  --text-dark: #1e293b;
+  --text-light: #f8fafc;
+  --card-bg: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: var(--bg-dark-blue);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+}
+.logo {
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.logo span {
+  color: var(--primary-orange);
+}
+.nav-item {
+  padding: 15px 20px;
+  color: #cbd5e1;
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+}
+.nav-item:hover,
+.nav-item.active {
+  background-color: rgba(249, 115, 22, 0.1);
+  color: var(--primary-orange);
+  border-left: 4px solid var(--primary-orange);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.topbar {
+  background: var(--card-bg);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+.content {
+  padding: 30px;
+}
+
+/* Dashboard Elements */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.btn-primary {
+  background: var(--primary-orange);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn-primary:hover {
+  background: var(--hover-orange);
+}
+
+.kpi-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.card h3 {
+  font-size: 14px;
+  color: #64748b;
+  text-transform: uppercase;
+}
+.card .number {
+  font-size: 32px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.text-orange {
+  color: var(--primary-orange);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* Table */
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+.modern-table th,
+.modern-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+.modern-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+/* Badges (Etiquetas de Status) */
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.status-aberto {
+  background: #fee2e2;
+  color: #ef4444;
+}
+.status-resolvido {
+  background: #dcfce3;
+  color: #22c55e;
+}
+.prio-alta {
+  background: rgba(249, 115, 22, 0.2);
+  color: var(--primary-orange);
+}
+
+/* =========================================
+   ESTILOS DA TELA DE FORMULÁRIO (ATUALIZADO)
+   ========================================= */
+.form-container { 
+    max-width: 700px; 
+    margin: 30px auto; 
+    padding: 40px; 
+    background-color: #ffffff; /* Fundo branco pra destacar */
+    border-radius: 12px;       /* Bordas mais arredondadas */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra suave e moderna */
+}
+
+.form-group { 
+    margin-bottom: 25px; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.form-group label { 
+    font-weight: 600; 
+    font-size: 14px; 
+    margin-bottom: 8px; 
+    color: #334155; 
+}
+
+/* O Segredo: width 100% e fundo moderno */
+.form-control { 
+    width: 100%; 
+    padding: 14px 16px; 
+    border: 1px solid #cbd5e1; 
+    border-radius: 8px; 
+    font-size: 15px; 
+    outline: none; 
+    transition: all 0.3s ease; 
+    background-color: #f8fafc; /* Cinza bem clarinho */
+    color: #1e293b;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-control:focus { 
+    border-color: var(--primary-orange); 
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15); /* Efeito de "brilho" laranja ao clicar */
+}
+
+.form-row { 
+    display: flex; 
+    gap: 20px; 
+    width: 100%;
+}
+
+.half { 
+    flex: 1; 
+}
+
+/* Deixando o botão mais gordinho e bonito */
+button[type="submit"].btn-primary {
+    background: var(--primary-orange);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button[type="submit"].btn-primary:hover {
+    background: #ea580c;
+    transform: translateY(-2px); /* Efeito de levantar ao passar o mouse */
+    box-shadow: 0 6px 15px rgba(249, 115, 22, 0.3);
+}
