@@ -1,22 +1,30 @@
 document.addEventListener("DOMContentLoaded", function() {
     const ctx = document.getElementById('chamadosChart').getContext('2d');
     
-    // Pegamos a cor laranja direto do CSS
+    // Nossas cores modernas
     const orangeColor = '#f97316'; 
     const darkBlueColor = '#0f172a';
+    const lightBlue = '#3b82f6';
+    const grayColor = '#cbd5e1';
+    const greenColor = '#22c55e';
+
+    // Pegamos as variáveis dinâmicas que o Django mandou pelo HTML
+    // Se, por algum motivo falhar, usamos um padrão vazio
+    const labelsValues = typeof chartLabels !== 'undefined' ? chartLabels : ['Nenhum'];
+    const dataValues = typeof chartData !== 'undefined' ? chartData : [1];
+
+    // Se só tiver "Sem chamados", o gráfico fica todo cinza
+    const backgroundColors = labelsValues[0] === 'Sem chamados' 
+        ? [grayColor] 
+        : [orangeColor, darkBlueColor, lightBlue, greenColor, grayColor];
 
     new Chart(ctx, {
-        type: 'doughnut', // Gráfico de rosca
+        type: 'doughnut',
         data: {
-            labels: ['Software', 'Hardware', 'Acesso', 'Financeiro'],
+            labels: labelsValues,
             datasets: [{
-                data: [45, 25, 20, 10], // Dados fictícios por enquanto
-                backgroundColor: [
-                    orangeColor,
-                    darkBlueColor,
-                    '#3b82f6', // Azul claro
-                    '#cbd5e1'  // Cinza
-                ],
+                data: dataValues,
+                backgroundColor: backgroundColors,
                 borderWidth: 0
             }]
         },
@@ -27,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     position: 'bottom',
                 }
             },
-            cutout: '75%' // Deixa a rosca mais fina e moderna
+            cutout: '75%'
         }
     });
 });

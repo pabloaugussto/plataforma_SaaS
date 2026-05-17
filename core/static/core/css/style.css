@@ -165,16 +165,14 @@ body {
   color: var(--primary-orange);
 }
 
-/* =========================================
-   ESTILOS DA TELA DE FORMULÁRIO (ATUALIZADO)
-   ========================================= */
+
 .form-container { 
     max-width: 700px; 
     margin: 30px auto; 
     padding: 40px; 
-    background-color: #ffffff; /* Fundo branco pra destacar */
-    border-radius: 12px;       /* Bordas mais arredondadas */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra suave e moderna */
+    background-color: #ffffff; 
+    border-radius: 12px;       
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); 
 }
 
 .form-group { 
@@ -190,7 +188,7 @@ body {
     color: #334155; 
 }
 
-/* O Segredo: width 100% e fundo moderno */
+
 .form-control { 
     width: 100%; 
     padding: 14px 16px; 
@@ -199,7 +197,7 @@ body {
     font-size: 15px; 
     outline: none; 
     transition: all 0.3s ease; 
-    background-color: #f8fafc; /* Cinza bem clarinho */
+    background-color: #f8fafc; 
     color: #1e293b;
     font-family: 'Inter', sans-serif;
 }
@@ -207,7 +205,7 @@ body {
 .form-control:focus { 
     border-color: var(--primary-orange); 
     background-color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15); /* Efeito de "brilho" laranja ao clicar */
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15); 
 }
 
 .form-row { 
@@ -220,7 +218,7 @@ body {
     flex: 1; 
 }
 
-/* Deixando o botão mais gordinho e bonito */
+
 button[type="submit"].btn-primary {
     background: var(--primary-orange);
     color: white;
@@ -235,6 +233,6 @@ button[type="submit"].btn-primary {
 
 button[type="submit"].btn-primary:hover {
     background: #ea580c;
-    transform: translateY(-2px); /* Efeito de levantar ao passar o mouse */
+    transform: translateY(-2px); 
     box-shadow: 0 6px 15px rgba(249, 115, 22, 0.3);
 }

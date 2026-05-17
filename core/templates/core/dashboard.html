@@ -39,7 +39,7 @@
             <tbody>
                 {% for ticket in tickets|slice:":5" %}
                 <tr>
-                    <td>#{{ ticket.id }}</td>
+                    <td><a href="{% url 'detalhes_chamado' ticket.id %}" style="color: var(--primary-orange); font-weight: bold; text-decoration: none;">#{{ ticket.id }}</a></td>
                     <td>{{ ticket.titulo }}</td>
                     <td><span class="badge status-{{ ticket.status }}">{{ ticket.get_status_display }}</span></td>
                     <td><span class="badge prio-{{ ticket.prioridade }}">{{ ticket.get_prioridade_display }}</span></td>
@@ -53,6 +53,11 @@
         </table>
     </div>
 </div>
+
+<script>
+    const chartLabels = {{ chart_labels|default:'["Sem chamados"]'|safe }};
+    const chartData = {{ chart_data|default:'[1]'|safe }};
+</script>
 
 <script src="{% static 'core/js/dashboard.js' %}"></script>
 {% endblock %}

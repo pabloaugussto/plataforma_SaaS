@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>Chamado #{{ ticket.id }}</h1>
+    <a href="{% url 'dashboard' %}" class="btn-secondary">Voltar ao Dashboard</a>
+</div>
+
+<div class="dashboard-grid">
+    <div class="card" style="padding: 30px;">
+        <h2 style="margin-bottom: 20px; color: var(--text-dark);">{{ ticket.titulo }}</h2>
+        
+        <div style="display: flex; gap: 15px; margin-bottom: 25px;">
+            <span class="badge status-{{ ticket.status }}">{{ ticket.get_status_display }}</span>
+            <span class="badge prio-{{ ticket.prioridade }}">{{ ticket.get_prioridade_display }}</span>
+            <span class="badge" style="background: #e2e8f0; color: #475569;">{{ ticket.get_categoria_display }}</span>
+        </div>
+
+        <h4 style="color: #64748b; margin-bottom: 10px; font-size: 14px;">DESCRIÇÃO DO PROBLEMA:</h4>
+        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; line-height: 1.6; color: #334155;">
+            {{ ticket.descricao|linebreaks }}
+        </div>
+        
+        <p style="margin-top: 20px; font-size: 13px; color: #94a3b8;">Aberto por <strong>{{ ticket.cliente.username }}</strong> em {{ ticket.data_criacao|date:"d/m/Y H:i" }}</p>
+    </div>
+
+    <div>
+        <div class="card" style="padding: 25px; margin-bottom: 20px;">
+            <h3 style="margin-bottom: 15px;">Atualizar Status</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <select name="status" class="form-control" style="margin-bottom: 15px;">
+                        <option value="aberto" {% if ticket.status == 'aberto' %}selected{% endif %}>Aberto</option>
+                        <option value="atendimento" {% if ticket.status == 'atendimento' %}selected{% endif %}>Em Atendimento</option>
+                        <option value="resolvido" {% if ticket.status == 'resolvido' %}selected{% endif %}>Resolvido</option>
+                        <option value="fechado" {% if ticket.status == 'fechado' %}selected{% endif %}>Fechado</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Salvar Alteração</button>
+            </form>
+        </div>
+
+        <div class="card" style="padding: 25px;">
+            <h3 style="margin-bottom: 15px;">Histórico</h3>
+            <ul style="list-style: none; padding: 0;">
+                {% for log in historico %}
+                <li style="padding-bottom: 10px; border-bottom: 1px solid #f1f5f9; margin-bottom: 10px; font-size: 14px;">
+                    <strong>{{ log.usuario.username }}</strong>: {{ log.acao }}
+                    <br>
+                    <small style="color: #94a3b8;">{{ log.data_registro|date:"d/m/Y H:i" }}</small>
+                </li>
+                {% empty %}
+                <li style="font-size: 14px; color: #94a3b8;">Nenhuma atualização registrada.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
