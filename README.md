@@ -38,7 +38,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/YOUR_GITHUB_USERNAME/plataforma_SaaS.git](https://github.com/YOUR_GITHUB_USERNAME/plataforma_SaaS.git)
+   git clone (https://github.com/YOUR_GITHUB_USERNAME/plataforma_SaaS.git)
    cd plataforma_SaaS
 
 2.Create and activate a virtual environment:
