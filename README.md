@@ -24,8 +24,8 @@ A modern, responsive, and robust IT Helpdesk ticketing system designed for B2B e
 * **Architecture:** MVT (Model-View-Template)
 
 ## 📸 Screenshots
+<img width="1920" height="967" alt="image" src="https://github.com/user-attachments/assets/7893d210-2514-4ec1-bd6b-595cffa7398e" />
 
-*(You can add screenshots of your project here later!)*
 ## ⚙️ Local Setup & Installation
 
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
