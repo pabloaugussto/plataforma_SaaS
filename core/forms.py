@@ -4,14 +4,13 @@ from .models import Ticket
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        # Definimos quais campos do nosso Model vão aparecer para o cliente preencher
-        fields = ['titulo', 'descricao', 'categoria', 'prioridade']
+        fields = ['titulo', 'categoria', 'prioridade', 'descricao']
         
-        # Aqui customizamos o HTML de cada campo para que eles usem o visual moderno do nosso CSS
+        # Aqui é onde a magia acontece: injetamos o CSS do nosso Dark Mode!
         widgets = {
             'titulo': forms.TextInput(attrs={
                 'class': 'form-control', 
-                'placeholder': 'Ex: Erro ao acessar a tela de relatórios'
+                'placeholder': 'Ex: O sistema não está a iniciar...'
             }),
             'categoria': forms.Select(attrs={
                 'class': 'form-control'
@@ -21,7 +20,7 @@ class TicketForm(forms.ModelForm):
             }),
             'descricao': forms.Textarea(attrs={
                 'class': 'form-control', 
-                'rows': 4, 
-                'placeholder': 'Detalhe o problema que você está enfrentando...'
+                'rows': 5, 
+                'placeholder': 'Detalhe o problema com o máximo de informações possível...'
             }),
         }

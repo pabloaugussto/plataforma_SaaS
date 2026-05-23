@@ -5,7 +5,7 @@ import json
 from .models import Ticket, TicketLog
 from .forms import TicketForm
 
-@login_required(login_url='/admin/login/')
+@login_required(login_url='login')
 def dashboard(request):
     tickets = Ticket.objects.filter(cliente=request.user)
     
@@ -37,7 +37,7 @@ def dashboard(request):
     
     return render(request, 'core/dashboard.html', context)
 
-@login_required(login_url='/admin/login/')
+@login_required(login_url='login')
 def novo_chamado(request):
     if request.method == 'POST':
         form = TicketForm(request.POST)
@@ -51,7 +51,7 @@ def novo_chamado(request):
         
     return render(request, 'core/novo_chamado.html', {'form': form})
 
-@login_required(login_url='/admin/login/')
+@login_required(login_url='login')
 def detalhes_chamado(request, id):
     ticket = get_object_or_404(Ticket, id=id)
     

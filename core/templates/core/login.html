@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - HelpDesk SaaS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e Base Escura */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: #050505; /* Preto absoluto quase Apple */
+            overflow: hidden;
+            color: #fff;
+            perspective: 1000px; /* Necessário para o efeito 3D */
+        }
+
+        /* Luzes Flutuantes de Fundo (Mesh Gradient Animado) */
+        .background-orbs {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.5;
+            animation: float 12s infinite alternate ease-in-out;
+        }
+        .orb-1 {
+            width: 450px; height: 450px;
+            background: #f97316; /* Laranja Helpdesk */
+            top: -150px; left: -100px;
+        }
+        .orb-2 {
+            width: 550px; height: 550px;
+            background: #0f172a; /* Azul Escuro */
+            bottom: -200px; right: -150px;
+            animation-delay: -5s;
+        }
+        .orb-3 {
+            width: 350px; height: 350px;
+            background: #3b82f6; /* Azul Neon */
+            top: 40%; left: 60%;
+            transform: translate(-50%, -50%);
+            animation: pulse 8s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(80px) translateX(80px); }
+        }
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.6; }
+        }
+
+        /* O Cartão de Vidro (Glassmorphism) */
+        .login-wrapper {
+            position: relative;
+            z-index: 1;
+            /* Isso permite que o JS gire o cartão sem quebrar a sombra */
+            transform-style: preserve-3d; 
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 100%;
+            min-width: 380px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .login-logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 45px;
+            letter-spacing: -1px;
+        }
+        .login-logo span { color: #f97316; }
+
+        /* Inputs Futuristas (Linha Inferior e Floating Label) */
+        .input-group {
+            position: relative;
+            margin-bottom: 35px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease;
+        }
+        .input-group label {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.4);
+            pointer-events: none; /* Para o clique passar pelo texto e ir para o input */
+            transition: 0.3s ease all;
+        }
+
+        /* A mágica da label subir quando clica ou preenche */
+        .input-group input:focus,
+        .input-group input:not(:placeholder-shown) {
+            border-bottom-color: #f97316;
+        }
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label {
+            top: -20px;
+            font-size: 12px;
+            color: #f97316;
+            font-weight: 600;
+        }
+
+        /* Botão Premium */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.5);
+        }
+
+        /* Alerta de Erro Elegante */
+        .error-message {
+            color: #ff4d4f;
+            background: rgba(255, 77, 79, 0.1);
+            border: 1px solid rgba(255, 77, 79, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="login-wrapper" id="loginWrapper">
+        <div class="login-card">
+            <div class="login-logo">Help<span>Desk</span></div>
+            
+            {% if form.errors %}
+                <div class="error-message">Credenciais inválidas. Tente novamente.</div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <input type="text" name="username" id="username" placeholder=" " required autofocus>
+                    <label for="username">Usuário</label>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" name="password" id="password" placeholder=" " required>
+                    <label for="password">Senha</label>
+                </div>
+
+                <button type="submit" class="btn-submit">Entrar no Sistema</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const wrapper = document.getElementById("loginWrapper");
+
+        document.addEventListener("mousemove", (e) => {
+            // Calcula a posição do mouse em relação ao centro da tela
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            
+            // Aplica a rotação no eixo X e Y invertidos para dar o efeito de profundidade
+            wrapper.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        // Quando o mouse sai da tela, o cartão volta pro eixo 0 suavemente
+        document.addEventListener("mouseleave", () => {
+            wrapper.style.transition = "transform 0.5s ease";
+            wrapper.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+
+        // Remove o delay da transição quando o mouse está ativamente movendo
+        wrapper.addEventListener("mouseenter", () => {
+            wrapper.style.transition = "none";
+        });
+    </script>
+
+</body>
+</html>

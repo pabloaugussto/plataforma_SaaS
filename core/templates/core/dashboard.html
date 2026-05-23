@@ -2,55 +2,68 @@
 {% load static %}
 
 {% block content %}
-<div class="dashboard-header">
-    <h1>Visão Geral</h1>
-    <a href="{% url 'novo_chamado' %}" class="btn-primary">Abrir Chamado</a>
+<div style="margin-bottom: 35px;">
+    <h1 style="font-size: 32px; font-weight: 700; letter-spacing: -1px; color: var(--text-light);">Visão Geral</h1>
 </div>
 
-<div class="kpi-cards">
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 30px;">
     <div class="card">
-        <h3>Total de Chamados</h3>
-        <p class="number">{{ total }}</p> </div>
-    <div class="card alert">
-        <h3>Abertos / Em Espera</h3>
-        <p class="number text-orange">{{ abertos }}</p> </div>
-    <div class="card success">
-        <h3>Resolvidos</h3>
-        <p class="number">{{ resolvidos }}</p> </div>
+        <h3 class="kpi-title">Total de Chamados</h3>
+        <div class="kpi-number">{{ total }}</div>
+    </div>
+    <div class="card">
+        <h3 class="kpi-title">Abertos / Em Espera</h3>
+        <div class="kpi-number orange">{{ abertos }}</div>
+    </div>
+    <div class="card">
+        <h3 class="kpi-title">Resolvidos</h3>
+        <div class="kpi-number">{{ resolvidos }}</div>
+    </div>
 </div>
 
 <div class="dashboard-grid">
-    <div class="chart-container card">
-        <h2>Chamados por Categoria</h2>
-        <canvas id="chamadosChart"></canvas>
+    
+    <div class="card">
+        <h2 style="font-size: 18px; margin-bottom: 25px; font-weight: 600;">Chamados por Categoria</h2>
+        <div style="position: relative; height: 300px; display: flex; justify-content: center;">
+            <canvas id="chamadosChart"></canvas>
+        </div>
     </div>
 
-    <div class="table-container card">
-        <h2>Chamados Recentes</h2>
-        <table class="modern-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Status</th>
-                    <th>Prioridade</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for ticket in tickets|slice:":5" %}
-                <tr>
-                    <td><a href="{% url 'detalhes_chamado' ticket.id %}" style="color: var(--primary-orange); font-weight: bold; text-decoration: none;">#{{ ticket.id }}</a></td>
-                    <td>{{ ticket.titulo }}</td>
-                    <td><span class="badge status-{{ ticket.status }}">{{ ticket.get_status_display }}</span></td>
-                    <td><span class="badge prio-{{ ticket.prioridade }}">{{ ticket.get_prioridade_display }}</span></td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="4" style="text-align: center;">Nenhum chamado encontrado.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="card" style="padding: 0; overflow: hidden;">
+        <div style="padding: 25px 30px; border-bottom: 1px solid var(--glass-border);">
+            <h2 style="font-size: 18px; font-weight: 600;">Chamados Recentes</h2>
+        </div>
+        <div style="overflow-x: auto;">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Status</th>
+                        <th>Prioridade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in tickets|slice:":5" %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'detalhes_chamado' ticket.id %}" style="color: var(--primary-orange); font-weight: bold; text-decoration: none;">
+                                #{{ ticket.id }}
+                            </a>
+                        </td>
+                        <td style="font-weight: 300;">{{ ticket.titulo }}</td>
+                        <td><span class="badge status-{{ ticket.status }}">{{ ticket.get_status_display }}</span></td>
+                        <td><span class="badge prio-{{ ticket.prioridade }}">{{ ticket.get_prioridade_display }}</span></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 40px;">Nenhum chamado encontrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -58,6 +71,5 @@
     const chartLabels = {{ chart_labels|default:'["Sem chamados"]'|safe }};
     const chartData = {{ chart_data|default:'[1]'|safe }};
 </script>
-
 <script src="{% static 'core/js/dashboard.js' %}"></script>
 {% endblock %}
