@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.contrib import messages
 import json
 from .models import Ticket, TicketLog
-from .forms import TicketForm
+from .forms import TicketForm, PerfilForm
+
 
 @login_required(login_url='login')
 def dashboard(request):
@@ -13,7 +15,7 @@ def dashboard(request):
     abertos = tickets.filter(status__in=['aberto', 'atendimento']).count()
     resolvidos = tickets.filter(status='resolvido').count()
     
-    # === LÓGICA DO GRÁFICO ===
+    
     categorias_count = tickets.values('categoria').annotate(total=Count('categoria'))
     dict_categorias = dict(Ticket.CATEGORIA_CHOICES)
     
@@ -74,3 +76,16 @@ def detalhes_chamado(request, id):
 
     historico = ticket.historico.all()
     return render(request, 'core/detalhes_chamado.html', {'ticket': ticket, 'historico': historico})
+
+@login_required(login_url='login')
+def configuracoes(request):
+    if request.method == 'POST':
+        form = PerfilForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'O seu perfil foi atualizado com sucesso!')
+            return redirect('configuracoes')
+    else:
+        form = PerfilForm(instance=request.user)
+        
+    return render(request, 'core/configuracoes.html', {'form': form})

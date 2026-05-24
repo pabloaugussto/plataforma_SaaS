@@ -1,8 +1,5 @@
-/* =========================================
-   VARIÁVEIS - TEMA PREMIUM DARK GLASS
-   ========================================= */
 :root {
-  --bg-main: #0a0f1c; /* Fundo escuro profundo */
+  --bg-main: #0a0f1c;
   --primary-orange: #f97316;
   --primary-hover: #ea580c;
   --text-light: #f8fafc;
@@ -27,11 +24,8 @@ body {
   min-height: 100vh;
 }
 
-/* =========================================
-   SIDEBAR RETRÁTIL (EFEITO HOVER)
-   ========================================= */
 .sidebar {
-  width: 80px; /* Largura fechada */
+  width: 80px;
   position: fixed;
   left: 0;
   top: 0;
@@ -50,11 +44,10 @@ body {
 }
 
 .sidebar:hover {
-  width: 280px; /* Largura aberta */
+  width: 280px;
   box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
 }
 
-/* Logo Animada */
 .logo {
   padding: 0 20px;
   margin-bottom: 50px;
@@ -86,7 +79,6 @@ body {
   opacity: 1;
 }
 
-/* Itens do Menu Animados */
 .nav-item {
   padding: 15px 20px;
   color: var(--text-muted);
@@ -117,11 +109,8 @@ body {
   opacity: 1;
 }
 
-/* =========================================
-   ESTRUTURA PRINCIPAL E TOPBAR
-   ========================================= */
 .main-content {
-  margin-left: 80px; /* Compensa a sidebar fechada */
+  margin-left: 80px;
   flex: 1;
   padding: 40px 60px;
   transition: margin-left 0.4s;
@@ -148,9 +137,6 @@ body {
   font-size: 16px;
 }
 
-/* =========================================
-   CARTÕES, TABELAS E BOTÕES
-   ========================================= */
 .card {
   background: var(--glass-bg);
   backdrop-filter: blur(25px);
@@ -178,11 +164,13 @@ body {
   font-size: 3rem;
   font-weight: 700;
   background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .kpi-number.orange {
   background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -252,9 +240,7 @@ body {
   color: #fca5a5;
 }
 
-/* =========================================
-   FORMULÁRIOS PREMIUM (DARK MODE)
-   ========================================= */
+
 
 .form-group {
   margin-bottom: 20px;
@@ -263,8 +249,8 @@ body {
 .form-control {
   width: 100%;
   padding: 14px 16px;
-  background: rgba(15, 23, 42, 0.6); /* Fundo escuro translúcido */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda muito suave */
+  background: rgba(15, 23, 42, 0.6); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
   border-radius: 10px;
   color: var(--text-light);
   font-size: 15px;
@@ -273,19 +259,18 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-/* O que acontece quando o usuário clica no campo */
+
 .form-control:focus {
   border-color: var(--primary-orange);
   background: rgba(15, 23, 42, 0.9);
   box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
 }
 
-/* Deixa o texto de exemplo (placeholder) mais sutil */
+
 .form-control::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
 
-/* Ocultar a setinha feia do navegador e colocar uma moderna no Select */
 select.form-control {
   appearance: none;
   -webkit-appearance: none;
@@ -298,22 +283,20 @@ select.form-control {
   cursor: pointer;
 }
 
-/* Fundo escuro para a lista suspensa (dropdown) */
+
 select.form-control option {
   background-color: var(--bg-main);
   color: var(--text-light);
   padding: 10px;
 }
 
-/* A área de texto maior */
+
 textarea.form-control {
   resize: vertical;
   min-height: 120px;
 }
 
-/* =========================================
-   BOTÃO SECUNDÁRIO (Voltar)
-   ========================================= */
+
 .btn-secondary {
   background: rgba(255, 255, 255, 0.05);
   color: var(--text-muted);
